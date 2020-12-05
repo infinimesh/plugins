@@ -19,6 +19,7 @@ type tokenHandlerImpl struct {
 	client    *http.Client
 	username  string
 	password  string
+	apiUrl    string
 	lastToken string
 }
 
@@ -28,11 +29,12 @@ type tokenHandlerImpl struct {
 // tick duration
 //
 // If a token retrieval attempt fails, GetToken returns the previous token
-func NewTokenHandler(username, password string, refreshInterval time.Duration) TokenHandler {
+func NewTokenHandler(username, password, apiUrl string, refreshInterval time.Duration) TokenHandler {
 	h := &tokenHandlerImpl{
 		client:   &http.Client{},
 		username: username,
 		password: password,
+		apiUrl:   apiUrl,
 	}
 	if err := h.RefreshToken(); err != nil {
 		log.Printf("error retrieving token: %s\n", err)
@@ -63,7 +65,7 @@ func (h *tokenHandlerImpl) RefreshToken() error {
 		Password: h.password,
 	})
 
-	req, _ := http.NewRequestWithContext(context.Background(), http.MethodPost, endpointAccountToken, bytes.NewBuffer(b))
+	req, _ := http.NewRequestWithContext(context.Background(), http.MethodPost, h.apiUrl+endpointAccountToken, bytes.NewBuffer(b))
 	req.Header.Add("Content-Type", "application/json")
 
 	res, err := h.client.Do(req)

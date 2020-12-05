@@ -8,6 +8,7 @@ services:
     environment:
       - USERNAME=changeme
       - PASSWORD=changeme
+      - API_URL=changeme
       - TOKEN_REFRESH_INTERVAL_SECS=3600
       - DEVICE_REFRESH_INTERVAL_SECS=600
       - REDIS_ADDR=redis:6379

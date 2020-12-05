@@ -7,20 +7,6 @@ import (
 	redistimeseries "github.com/RedisTimeSeries/redistimeseries-go"
 )
 
-// dataKeys are the keys in shadow.reported.data that are numeric
-var dataKeys = []string{
-	"ac_realpower",
-	"apparent_power",
-	"day_yield",
-	"dc_inc_volt_A",
-	"dc_input",
-	"grid_current_ampere",
-	"grid_freq",
-	"grid_phase_A",
-	"grid_phase_B",
-	"grid_phase_C",
-}
-
 type objectWorker struct {
 	obj         api.Object
 	api         api.Handler
@@ -37,34 +23,36 @@ func (w *objectWorker) Start() {
 		},
 	}
 
-	for _, k := range dataKeys {
-		err := w.redisClient.CreateKeyWithOptions(k+":"+w.obj.UID, createOpts)
-		if err != nil {
-			log.Printf("error creating redis key %s: %s\n", k, err)
-		}
-	}
-
 	ch, err := w.api.GetDevicesStateStream(w.obj.UID)
 	if err != nil {
 		log.Printf("error on get devices state stream: %s\n", err)
 	}
+
+	createdKeys := map[string]bool{}
 
 	for {
 		select {
 		case <-w.done:
 			return
 		case state := <-ch:
-			for _, k := range dataKeys {
-				if state == nil || state.Result.ReportedState.Data == nil || state.Result.ReportedState.Data[k] == nil {
-					log.Printf("received nil data for object %v and key %s", w.obj, k)
+			if state == nil {
+				log.Printf("received nil state for object %v", w.obj)
+				continue
+			}
+			for k, v := range state.Result.ReportedState.Data {
+				if v == nil {
 					continue
 				}
-				v, ok := state.Result.ReportedState.Data[k].(float64)
+				f, ok := v.(float64)
 				if !ok {
 					log.Printf("invalid data type found for object %v and key %s", w.obj, k)
 					continue
 				}
-				_, err = w.redisClient.AddAutoTsWithOptions(k+":"+w.obj.UID, v, createOpts)
+				if !createdKeys[k] {
+					_ = w.redisClient.CreateKeyWithOptions(k+":"+w.obj.UID, createOpts)
+					createdKeys[k] = true
+				}
+				_, err = w.redisClient.AddAutoTsWithOptions(k+":"+w.obj.UID, f, createOpts)
 				if err != nil {
 					log.Printf("failed to add time series item: %s\n", err)
 					continue
