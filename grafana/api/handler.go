@@ -19,17 +19,19 @@ type Handler interface {
 type handlerImpl struct {
 	client       *http.Client
 	tokenHandler TokenHandler
+	apiUrl       string
 }
 
-func NewHandler(tokenHandler TokenHandler) Handler {
+func NewHandler(tokenHandler TokenHandler, apiUrl string) Handler {
 	return &handlerImpl{
 		client:       &http.Client{},
 		tokenHandler: tokenHandler,
+		apiUrl:       apiUrl,
 	}
 }
 
-func (h *handlerImpl) authRequest(ctx context.Context, method, url string, body io.Reader) (*http.Response, error) {
-	req, err := http.NewRequestWithContext(ctx, method, url, nil)
+func (h *handlerImpl) authRequest(ctx context.Context, method, path string, body io.Reader) (*http.Response, error) {
+	req, err := http.NewRequestWithContext(ctx, method, h.apiUrl+path, nil)
 	if err != nil {
 		return nil, err
 	}

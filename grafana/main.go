@@ -15,6 +15,7 @@ import (
 const (
 	envUsername                  = "USERNAME"
 	envPassword                  = "PASSWORD"
+	envApiUrl                    = "API_URL"
 	envTokenRefreshIntervalSecs  = "TOKEN_REFRESH_INTERVAL_SECS"
 	envDeviceRefreshIntervalSecs = "DEVICE_REFRESH_INTERVAL_SECS"
 	envRedisAddr                 = "REDIS_ADDR"
@@ -23,6 +24,7 @@ const (
 func main() {
 	username := os.Getenv(envUsername)
 	password := os.Getenv(envPassword)
+	apiUrl := os.Getenv(envApiUrl)
 	tokenRefreshIntervalSecsStr := os.Getenv(envTokenRefreshIntervalSecs)
 	tokenRefreshIntervalSecs, err := strconv.Atoi(tokenRefreshIntervalSecsStr)
 	if err != nil {
@@ -42,7 +44,8 @@ func main() {
 
 	proc.New(
 		api.NewHandler(
-			api.NewTokenHandler(username, password, time.Duration(tokenRefreshIntervalSecs)*time.Second),
+			api.NewTokenHandler(username, password, apiUrl, time.Duration(tokenRefreshIntervalSecs)*time.Second),
+			apiUrl,
 		),
 		client,
 	).Run(time.Duration(deviceRefreshIntervalSecs) * time.Second)

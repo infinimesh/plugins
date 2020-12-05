@@ -4,7 +4,7 @@ This plugin lets your grafana instance connect with infinimesh via our API.
 
 ## Connector Setup
 
-Simply set the username and password environment variables in `docker-compose.yml`, then run everything via:
+Simply set the username, password and api url environment variables in `docker-compose.yml`, then run everything via:
 
 ```
 docker-compose up --build
