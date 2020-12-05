@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - USERNAME=changeme
+      - PASSWORD=changeme
+      - TOKEN_REFRESH_INTERVAL_SECS=3600
+      - DEVICE_REFRESH_INTERVAL_SECS=600
+      - REDIS_ADDR=redis:6379
+    restart: always
+  redis:
+    image: redislabs/redistimeseries:1.4.7
+    ports:
+      - 6379:6379
+  grafana:
+    image: grafana/grafana:7.3.4
+    ports:
+      - 3000:3000
+    environment:
+      - GF_INSTALL_PLUGINS=redis-datasource
