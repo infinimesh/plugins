@@ -1,4 +1,4 @@
-# Grafana backend plugin
+# Timeseries backend plugin
 
 This plugin lets your grafana instance connect with infinimesh via our API. We have Grafana builtin in this container, but you can use external services, too. We use Redis Timeseries as backend, the service connects to our stream API, iterate over /objects and build a timeseries structure for every device found. This plugin can be used as an blueprint, or hosted somewhere. We fully comply to GDPR and CCPA, and our users get full data ownership.  
 
