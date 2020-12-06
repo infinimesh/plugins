@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/InfiniteDevices/plugins/grafana/api"
+	"github.com/InfiniteDevices/plugins/timeseries/api"
 	redistimeseries "github.com/RedisTimeSeries/redistimeseries-go"
 )
 
