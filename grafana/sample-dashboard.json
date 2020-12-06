@@ -1,16 +1,45 @@
 {
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
   "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
   "panels": [
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
-        "w": 12,
+        "h": 15,
+        "w": 24,
         "x": 0,
         "y": 0
       },
       "hiddenSeries": false,
+      "id": 1,
       "legend": {
         "avg": false,
         "current": false,
@@ -44,6 +73,10 @@
           "type": "timeSeries"
         }
       ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
       "title": "Devices",
       "tooltip": {
         "shared": true,
@@ -83,10 +116,19 @@
     }
   ],
   "refresh": "5s",
+  "schemaVersion": 26,
   "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
   "time": {
-    "from": "now-15m",
+    "from": "now-1h",
     "to": "now"
   },
-  "title": "Sample Dashboard"
+  "timepicker": {},
+  "timezone": "",
+  "title": "Sample Dashboard",
+  "uid": "Kvt7Yq0Gk",
+  "version": 2
 }
