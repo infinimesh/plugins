@@ -25,3 +25,7 @@ First visit `localhost:3000` and sign in with the default grafana admin credenti
 Next add the redis data source by clicking under Configuration -> Data Sources -> Add Data Source -> Redis. Change the address setting to `redis://redis:6379`, and click on `Save and Test`.
 
 If the above works successfully, we should be able to begin visualizing some data. To get started, we can import the sample dashboard provided in this repository (`sample-dashboard.json`) by clicking on Create -> Import -> Upload JSON File.
+
+## Redis Timeseries
+
+We are using [Redislab Timeseries](https://oss.redislabs.com/redistimeseries/), for any documentation how to build dashboards using the redislab timeseries datasource please visit the link.
