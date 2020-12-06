@@ -1,10 +1,18 @@
 # Grafana backend plugin
 
-This plugin lets your grafana instance connect with infinimesh via our API.
+This plugin lets your grafana instance connect with infinimesh via our API. We have Grafana builtin in this container, but you can use external services, too. We use Redis Timeseries as backend, the service connects to our stream API, iterate over /objects and build a timeseries structure for every device found. This plugin can be used as an blueprint, or hosted somewhere. We fully comply to GDPR and CCPA, and our users get full data ownership.  
 
 ## Connector Setup
 
-Simply set the username, password and api url environment variables in `docker-compose.yml`, then run everything via:
+Simply set the username, password and api url environment variables in `docker-compose.yml`:
+```
+USERNAME=Your Infinimesh User Name  
+PASSWORD=Your Infinimesh Password
+API_URL=FQDN API Endpoint (like https://api.infinimesh.cloud)
+```
+The API Endpoint must be reachable via DNS, and the CA must be known.  
+  
+Then run everything via:
 
 ```
 docker-compose up --build
