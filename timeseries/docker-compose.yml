@@ -6,8 +6,8 @@ services:
       context: .
       dockerfile: ./Dockerfile
     environment:
-      - USERNAME=CHANGEME!
-      - PASSWORD=CHANGEME!
+      - USERNAME=CHANGEME
+      - PASSWORD=CHANGEME
       - API_URL=https://api.infinimesh.cloud
       - TOKEN_REFRESH_INTERVAL_SECS=3600
       - DEVICE_REFRESH_INTERVAL_SECS=600
