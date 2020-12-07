@@ -6,9 +6,9 @@ services:
       context: .
       dockerfile: ./Dockerfile
     environment:
-      - USERNAME=testflight
-      - PASSWORD=testfl1gHt
-      - API_URL=https://api.infinimesh.dev
+      - USERNAME=CHANGEME!
+      - PASSWORD=CHANGEME!
+      - API_URL=https://api.infinimesh.cloud
       - TOKEN_REFRESH_INTERVAL_SECS=3600
       - DEVICE_REFRESH_INTERVAL_SECS=600
       - REDIS_ADDR=redis:6379
