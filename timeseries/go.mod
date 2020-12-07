@@ -1,4 +1,4 @@
-module github.com/InfiniteDevices/plugins/grafana
+module github.com/InfiniteDevices/plugins/timeseries
 
 go 1.15
 

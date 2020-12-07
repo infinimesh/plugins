@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/InfiniteDevices/plugins/grafana/api"
-	"github.com/InfiniteDevices/plugins/grafana/proc"
+	"github.com/InfiniteDevices/plugins/timeseries/api"
+	"github.com/InfiniteDevices/plugins/timeseries/proc"
 	redistimeseries "github.com/RedisTimeSeries/redistimeseries-go"
 	"github.com/gomodule/redigo/redis"
 )
