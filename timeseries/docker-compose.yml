@@ -4,7 +4,7 @@ services:
   server:
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./timeseries/Dockerfile
     environment:
       - USERNAME=CHANGEME
       - PASSWORD=CHANGEME

@@ -1,17 +1,32 @@
-package proc
+package main
 
 import (
 	"log"
 
-	"github.com/InfiniteDevices/plugins/timeseries/api"
+	"github.com/InfiniteDevices/plugins/pkg/api"
+	"github.com/InfiniteDevices/plugins/pkg/wrappers"
 	redistimeseries "github.com/RedisTimeSeries/redistimeseries-go"
 )
+
+type objectWorkerFactory struct {
+	api         api.Handler
+	redisClient *redistimeseries.Client
+}
+
+func (f *objectWorkerFactory) NewObjectWorker(obj api.Object) wrappers.Process {
+	return &objectWorker{
+		obj:         obj,
+		api:         f.api,
+		redisClient: f.redisClient,
+		done:        make(chan struct{}),
+	}
+}
 
 type objectWorker struct {
 	obj         api.Object
 	api         api.Handler
-	done        chan struct{}
 	redisClient *redistimeseries.Client
+	done        chan struct{}
 }
 
 func (w *objectWorker) Start() {

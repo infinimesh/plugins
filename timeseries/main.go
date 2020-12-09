@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/InfiniteDevices/plugins/timeseries/api"
-	"github.com/InfiniteDevices/plugins/timeseries/proc"
+	"github.com/InfiniteDevices/plugins/pkg/api"
+	"github.com/InfiniteDevices/plugins/pkg/wrappers"
 	redistimeseries "github.com/RedisTimeSeries/redistimeseries-go"
 	"github.com/gomodule/redigo/redis"
 )
@@ -36,17 +36,20 @@ func main() {
 		log.Fatalf("invalid %s value: %s", envDeviceRefreshIntervalSecs, deviceRefreshIntervalSecsStr)
 	}
 	redisAddr := os.Getenv(envRedisAddr)
-
-	pool := &redis.Pool{Dial: func() (redis.Conn, error) {
+	redisPool := &redis.Pool{Dial: func() (redis.Conn, error) {
 		return redis.Dial("tcp", redisAddr)
 	}}
-	client := redistimeseries.NewClientFromPool(pool, "plugin")
-
-	proc.New(
-		api.NewHandler(
-			api.NewTokenHandler(username, password, apiUrl, time.Duration(tokenRefreshIntervalSecs)*time.Second),
-			apiUrl,
-		),
-		client,
-	).Run(time.Duration(deviceRefreshIntervalSecs) * time.Second)
+	redisClient := redistimeseries.NewClientFromPool(redisPool, "plugin")
+	apiHandler := api.NewHandler(
+		api.NewTokenHandler(username, password, apiUrl, time.Duration(tokenRefreshIntervalSecs)*time.Second),
+		apiUrl,
+	)
+	wrappers.NewObjectManager(
+		apiHandler,
+		(&objectWorkerFactory{
+			api:         apiHandler,
+			redisClient: redisClient,
+		}).NewObjectWorker,
+		time.Duration(deviceRefreshIntervalSecs)*time.Second,
+	).Start()
 }
