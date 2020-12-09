@@ -12,10 +12,10 @@ API_URL=FQDN API Endpoint (like https://api.infinimesh.cloud)
 ```
 The API Endpoint must be reachable via DNS, and the CA must be known.  
   
-Then run everything via:
+Then we can run everything from the repository root via:
 
 ```
-docker-compose up --build
+docker-compose -f timeseries/docker-compose.yml --project-directory . up --build
 ```
 
 ## Grafana Setup
