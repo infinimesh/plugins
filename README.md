@@ -6,7 +6,7 @@ pkg contains shared code to connect to our API, retrieve token and iterate over 
 named plugins describing the external backends and system, divided into their respective name:  
    * timeseries  
    redis-timeseries with grafana  
-   * SAPHana
+   * SAPHana  
    all code to connect infinimesh IoT platform to any SAPHana instance
    * Snowflake  
    all code to connect infinimesh IoT platform to any Snowflake instance using the Snowpipe API  
