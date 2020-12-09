@@ -4,7 +4,7 @@ We publish here plugins to connect infinimesh to external backends. To enable as
 pkg contains shared code to connect to our API, retrieve token and iterate over /objects to find devices in the desired namespace  
 * named plugins  
 named plugins describing the external backends and system, divided into their respective name:  
-   * timeseries  
+   * [timeseries](timeseries)  
    redis-timeseries with grafana  
    * SAPHana  
    all code to connect infinimesh IoT platform to any SAPHana instance
