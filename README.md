@@ -6,9 +6,16 @@ pkg contains shared code to connect to our API, retrieve token and iterate over 
 named plugins describing the external backends and system, divided into their respective name:  
    * [timeseries](timeseries)  
    redis-timeseries with grafana  
-   * SAPHana  
+   * [SAPHana](SAPHana)  
    all code to connect infinimesh IoT platform to any SAPHana instance
-   * Snowflake  
+   * [Snowflake](Snowflake)  
    all code to connect infinimesh IoT platform to any Snowflake instance using the Snowpipe API  
   
-More plugins will follow, please refer to the named plugins for any developer friendly documentation
+More plugins will follow, please refer to the named plugins for any developer friendly documentation  
+  
+## building plugins
+checkout and build docker based environments starting in the / directory of plugins, like:  
+```
+docker-compose -f timeseries/docker-compose.yml --project-directory . up --build
+```
+Please read the notes in the different plugin directories
