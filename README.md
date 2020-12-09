@@ -10,6 +10,8 @@ named plugins describing the external backends and system, divided into their re
    all code to connect infinimesh IoT platform to any SAPHana instance
    * [Snowflake](Snowflake)  
    all code to connect infinimesh IoT platform to any Snowflake instance using the Snowpipe API  
+   * [Scalytics](Scalytics)  
+   all code to connect infinimesh IoT Platform to [Scalytics](scalytics.io) using data ingest pipelines
   
 More plugins will follow, please refer to the named plugins for any developer friendly documentation  
   
