@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: ./timeseries/Dockerfile
     environment:
-      - USERNAME=CHANGEME
+      - USERNAME=CHAMGEME
       - PASSWORD=CHANGEME
       - API_URL=https://api.infinimesh.cloud
       - TOKEN_REFRESH_INTERVAL_SECS=3600
@@ -21,5 +21,7 @@ services:
     image: grafana/grafana:7.3.4
     ports:
       - 3000:3000
+    volumes:
+      - ./timeseries/provisioning:/etc/grafana/provisioning
     environment:
       - GF_INSTALL_PLUGINS=redis-datasource
