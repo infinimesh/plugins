@@ -6,8 +6,7 @@ We publish here plugins to connect infinimesh to external backends. To enable as
    * [redisstream](redistream)  
    shared code for generic cache and stream, based on redis. This package can be included into future plugins.
    
-* ### named plugins  
-named plugins describing the external backends and system, divided into their respective name:  
+* ### plugins  
    * [Timeseries](timeseries)  
    redis-timeseries with grafana  
    * [SAPHana](SAPHana)  
@@ -17,7 +16,7 @@ named plugins describing the external backends and system, divided into their re
    * [Scalytics](Scalytics)  
    all code to connect infinimesh IoT Platform to [Scalytics](https://www.scalytics.io) using data ingest pipelines
   
-More plugins will follow, please refer to the named plugins for any developer friendly documentation  
+More plugins will follow, please refer to the plugin directory for any developer friendly documentation.
   
 ## building plugins
 checkout and build docker based environments starting in the / directory of plugins, like:  
