@@ -5,7 +5,7 @@ We publish here plugins to connect infinimesh to external backends. To enable as
    pkg contains shared code to connect to our API, retrieve token and iterate over /objects to find devices in the desired namespace  
    * [redisstream](redistream)  
    shared code for generic cache and stream, based on redis. This package can be included into future plugins.
-============================================================================================================
+   
 * ### named plugins  
 named plugins describing the external backends and system, divided into their respective name:  
    * [timeseries](timeseries)  
