@@ -25,4 +25,4 @@ git clone https://github.com/InfiniteDevices/plugins.git
 cd plugins  
 docker-compose -f timeseries/docker-compose.yml --project-directory . up --build
 ```
-Please read the notes in the different plugin directories
+Please read the notes in the different plugin directories how to set ```username``` / ```password``` / API Endpoint (if not using [infinimesh.cloud](https://console.infinimesh.cloud)).
