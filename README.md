@@ -8,11 +8,11 @@ We publish here plugins to connect infinimesh to external backends. To enable as
    
 * ### plugins  
    * [Timeseries](timeseries)  
-   redis-timeseries with grafana  
+   [Redis-timeseries](https://oss.redislabs.com/redistimeseries/) with [Grafana](https://grafana.com/) for timeseries-analysis and rapid prototyping, can be used in production when configured as Redis cluster and ready to be hostet via [Redis-Cloud](https://redislabs.com/redis-enterprise-cloud/overview/). 
    * [SAPHana](SAPHana)  
-   all code to connect infinimesh IoT platform to any SAPHana instance
+   all code to connect infinimesh IoT platform to any [SAP Hana](https://www.sap.com/products/hana.html) instance
    * [Snowflake](Snowflake)  
-   all code to connect infinimesh IoT platform to any Snowflake instance using the Snowpipe API  
+   all code to connect infinimesh IoT platform to any [Snowflake](https://www.snowflake.com/) instance using the [Snowpipe API](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-rest-apis.html)  
    * [Scalytics](Scalytics)  
    all code to connect infinimesh IoT Platform to [Scalytics](https://www.scalytics.io) using data ingest pipelines
   
