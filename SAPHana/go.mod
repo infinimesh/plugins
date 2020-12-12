@@ -9,5 +9,6 @@ replace (
 
 require (
 	github.com/InfiniteDevices/plugins/redisstream v0.0.0
+	github.com/SAP/go-hdb v0.102.6
 	github.com/gomodule/redigo v1.8.3
 )
