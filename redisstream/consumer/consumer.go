@@ -39,7 +39,6 @@ func New(pool *redis.Pool) Consumer {
 }
 
 func (i *consumerImpl) Consume() <-chan *DeviceEvent {
-	i.createGroupIfNotExists()
 	ret := make(chan *DeviceEvent)
 	go func() {
 		for {
@@ -57,7 +56,13 @@ func (i *consumerImpl) loop(ch chan<- *DeviceEvent) bool {
 	defer conn.Close()
 	reply, err := conn.Do("XREADGROUP", "GROUP", "group", i.name, "STREAMS", "objects", ">")
 	if err != nil {
-		log.Printf("error on XREAD: %v\n", err)
+		log.Printf("error on XREADGROUP: %v\n", err)
+		// XREADGROUP errors if the consumer group does not yet exist in the
+		// stream. Most of the time however, the consumer group should have
+		// already been created, thus this is usually not a problem. Placing
+		// the group creation here feels more self-healing and slightly more
+		// efficient than creating the group prior to consuming from the stream
+		i.createGroupIfNotExists()
 		return true
 	}
 	if reply == nil {
@@ -76,7 +81,10 @@ func (i *consumerImpl) loop(ch chan<- *DeviceEvent) bool {
 func (i *consumerImpl) createGroupIfNotExists() {
 	conn := i.redis.Get()
 	defer conn.Close()
-	_, _ = conn.Do("XGROUP", "CREATE", "objects", "group", "$")
+	_, err := conn.Do("XGROUP", "CREATE", "objects", "group", "$", "MKSTREAM")
+	if err != nil {
+		log.Printf("error on XGROUP CREATE: %v\n", err)
+	}
 }
 
 func parseReply(reply interface{}) []RedisStreamEvent {

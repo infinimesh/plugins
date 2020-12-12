@@ -18,6 +18,11 @@ services:
       context: .
       dockerfile: ./SAPHana/Dockerfile
     environment:
+      - SAPHANA_INITDB=true
+      - SAPHANA_USERNAME=CHANGEME
+      - SAPHANA_PASSWORD=CHANGEME
+      - SAPHANA_HOST=CHANGEME
+      - SAPHANA_PORT=443
       - REDIS_ADDR=redis:6379
     restart: always
   redis:

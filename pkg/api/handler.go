@@ -7,7 +7,9 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
+	"time"
 )
 
 type Handler interface {
@@ -106,31 +108,35 @@ type DeviceState struct {
 }
 
 func (h *handlerImpl) GetDevicesStateStream(deviceID string) (<-chan *DevicesStateRes, error) {
-	url := fmt.Sprintf(endpointDevicesStateStream, deviceID) + "?only_delta=false"
-	res, err := h.authRequest(context.Background(), http.MethodGet, url, nil)
-	if err != nil {
-		return nil, NewFailedHTTPRequestError(http.MethodGet, url, err)
-	}
-	if res.StatusCode != http.StatusOK {
-		return nil, NewUnexpectedHTTPStatusCodeError(http.MethodGet, url, res.StatusCode)
-	}
-
-	rdr := bufio.NewReader(res.Body)
-	buf := make([]byte, 4*1024)
 	ret := make(chan *DevicesStateRes)
 	go func() {
 		for {
-			l, err := rdr.Read(buf)
-			if l > 0 {
-				b := buf[:l]
-				tmp := &DevicesStateRes{}
-				_ = json.Unmarshal(b, tmp)
-				ret <- tmp
-			}
+			url := fmt.Sprintf(endpointDevicesStateStream, deviceID) + "?only_delta=false"
+			res, err := h.authRequest(context.Background(), http.MethodGet, url, nil)
 			if err != nil {
-				close(ret)
-				res.Body.Close()
-				break
+				log.Println(NewFailedHTTPRequestError(http.MethodGet, url, err))
+				time.Sleep(time.Second)
+				continue
+			}
+			if res.StatusCode != http.StatusOK {
+				log.Println(NewUnexpectedHTTPStatusCodeError(http.MethodGet, url, res.StatusCode))
+				time.Sleep(time.Second)
+				continue
+			}
+			rdr := bufio.NewReader(res.Body)
+			buf := make([]byte, 4*1024)
+			for {
+				l, err := rdr.Read(buf)
+				if l > 0 {
+					b := buf[:l]
+					tmp := &DevicesStateRes{}
+					_ = json.Unmarshal(b, tmp)
+					ret <- tmp
+				}
+				if err != nil {
+					res.Body.Close()
+					break
+				}
 			}
 		}
 	}()
