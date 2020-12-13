@@ -12,7 +12,7 @@ We publish here plugins to connect infinimesh to external backends. To enable as
    * [SAPHana](SAPHana)  
    all code to connect infinimesh IoT platform to any [SAP Hana](https://www.sap.com/products/hana.html) instance
    * [Snowflake](Snowflake)  
-   all code to connect infinimesh IoT platform to any [Snowflake](https://www.snowflake.com/) instance using the [Snowpipe API](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-rest-apis.html)  
+   all code to connect infinimesh IoT platform to any [Snowflake](https://www.snowflake.com/) instance.  
    * [Scalytics](Scalytics)  
    all code to connect infinimesh IoT Platform to [Scalytics](https://www.scalytics.io) using data ingest pipelines
   
