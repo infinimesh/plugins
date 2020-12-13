@@ -19,7 +19,7 @@ services:
       dockerfile: ./Snowflake/Dockerfile
     environment:
       - SNOWFLAKE_INITDB=true
-      - SNOWFLAKE_ACCOUNT=CHANGEME
+      - SNOWFLAKE_ACCOUNT=CHANGEME # see https://docs.snowflake.com/en/user-guide/connecting.html
       - SNOWFLAKE_USER=CHANGEME
       - SNOWFLAKE_PASSWORD=CHANGEME
       - REDIS_ADDR=redis:6379

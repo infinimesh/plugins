@@ -45,6 +45,11 @@ func main() {
 		initDB(db)
 	}
 
+	_, err = db.Exec(`USE DATABASE infinimesh;`)
+	if err != nil {
+		log.Fatalf("failed to use infinimesh database, err: %v", err)
+	}
+
 	redisPool := &redis.Pool{Dial: func() (redis.Conn, error) {
 		return redis.Dial("tcp", os.Getenv(envRedisAddr))
 	}}
@@ -66,7 +71,6 @@ func main() {
 func initDB(db *sql.DB) {
 	for _, stmt := range []string{
 		`CREATE DATABASE IF NOT EXISTS infinimesh;`,
-		`USE DATABASE infinimesh;`,
 		`CREATE TABLE IF NOT EXISTS device_states (
 			uid VARCHAR(1000),
 			timestamp TIMESTAMP,
