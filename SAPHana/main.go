@@ -24,9 +24,6 @@ const (
 )
 
 func main() {
-	redisPool := &redis.Pool{Dial: func() (redis.Conn, error) {
-		return redis.Dial("tcp", os.Getenv(envRedisAddr))
-	}}
 	db := newSapHanaDB(
 		os.Getenv(envSapHanaHost),
 		os.Getenv(envSapHanaPort),
@@ -39,6 +36,9 @@ func main() {
 			log.Printf("failed to initialise db: err=%v\n", err)
 		}
 	}
+	redisPool := &redis.Pool{Dial: func() (redis.Conn, error) {
+		return redis.Dial("tcp", os.Getenv(envRedisAddr))
+	}}
 	c := consumer.New(redisPool)
 	for event := range c.Consume() {
 		if event == nil {
@@ -82,7 +82,7 @@ func initDB(db *sql.DB) error {
 }
 
 func insertDeviceEvent(db *sql.DB, event *consumer.DeviceEvent) error {
-	t, err := time.Parse("2006-01-02T15:04:05.000Z", event.State.Timestamp)
+	t, err := time.Parse(time.RFC3339Nano, event.State.Timestamp)
 	if err != nil {
 		return err
 	}

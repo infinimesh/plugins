@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  producer:
+    build:
+      context: .
+      dockerfile: ./redisstream/Dockerfile
+    environment:
+      - USERNAME=CHANGEME
+      - PASSWORD=CHANGEME
+      - API_URL=https://api.infinimesh.cloud
+      - TOKEN_REFRESH_INTERVAL_SECS=3600
+      - OBJECT_REFRESH_INTERVAL_SECS=600
+      - REDIS_ADDR=redis:6379
+    restart: always
+  consumer:
+    build:
+      context: .
+      dockerfile: ./Snowflake/Dockerfile
+    environment:
+      - SNOWFLAKE_INITDB=true
+      - SNOWFLAKE_ACCOUNT=CHANGEME
+      - SNOWFLAKE_USER=CHANGEME
+      - SNOWFLAKE_PASSWORD=CHANGEME
+      - REDIS_ADDR=redis:6379
+    restart: always
+  redis:
+    image: redis:6.0.9-alpine
+    ports:
+      - 6379:6379
