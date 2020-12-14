@@ -37,5 +37,5 @@ basicAuth: false
 ```
 and [docker-compose.yml](docker-compose.yml)   
 ```
-redis://username:password@instancename.ec2.cloud.redislabs.com:18029
+REDIS_ADDR=redis://username:password@instancename.ec2.cloud.redislabs.com:18029
 ```
