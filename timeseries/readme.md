@@ -27,8 +27,15 @@ We provisioning redis-timeseries as a default datasource, to get started import 
 ## Redis Timeseries / Redis Enterprise Cloud
 
 We are using [Redislab Timeseries](https://oss.redislabs.com/redistimeseries/), for any documentation how to build dashboards using the redislab timeseries datasource please visit the link.  
-The plugin works with [Redis Enterprise Cloud](https://redislabs.com/redis-enterprise-cloud/overview/), just edit the connection string in [provisioning/datasources/redists.yaml](provisioning/datasources/redists.yaml) like:  
+The plugin works with [Redis Enterprise Cloud](https://redislabs.com/redis-enterprise-cloud/overview/), you need to edit the connection string in [provisioning/datasources/redists.yaml](provisioning/datasources/redists.yaml) with your credentials, like:
+```
+url: redis://instancename.ec2.cloud.redislabs.com:18029
+password: 'CHAMGEME'
+user: 'CHAMGEME'
+database: 'DATABASE'
+basicAuth: false
+```
+and [docker-compose.yml](docker-compose.yml)   
 ```
 redis://username:password@instancename.ec2.cloud.redislabs.com:18029
 ```
-
