@@ -25,3 +25,4 @@ services:
       - ./timeseries/provisioning:/etc/grafana/provisioning
     environment:
       - GF_INSTALL_PLUGINS=redis-datasource
+      - GF_INSTALL_PLUGINS=redis-app
