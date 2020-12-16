@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  producer:
+    build:
+      context: .
+      dockerfile: ./redisstream/Dockerfile
+    environment:
+      - USERNAME=CHANGEME
+      - PASSWORD=CHANGEME
+      - API_URL=https://api.infinimesh.cloud
+      - TOKEN_REFRESH_INTERVAL_SECS=3600
+      - OBJECT_REFRESH_INTERVAL_SECS=600
+      - REDIS_ADDR=redis:6379
+    restart: on-failure
+  consumer:
+    build:
+      context: .
+      dockerfile: ./Elastic/Dockerfile
+    environment:
+      - REDIS_ADDR=redis:6379
+      - ES_ADDR=http://elasticsearch:9200
+    restart: on-failure
+  redis:
+    image: redis:6.0.9-alpine
+    ports:
+      - 6379:6379
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
