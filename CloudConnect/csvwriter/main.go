@@ -77,7 +77,7 @@ func (w *objectWorker) Start() {
 		return
 	}
 
-	err := os.MkdirAll(w.writeDir, os.ModePerm)
+	err = os.MkdirAll(w.writeDir, os.ModePerm)
 	if err != nil {
 		log.Fatalf("failed to mkdir: %v", err) // this should not happen
 	}
