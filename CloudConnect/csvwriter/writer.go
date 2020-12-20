@@ -43,7 +43,11 @@ func (w *writer) Write(record []string) error {
 }
 
 func writeUntil(t time.Time) time.Time {
-	// this currently returns "the nearest minute", which should make sense for
-	// most cases. We can make this configurable in future if needed
-	return t.Round(time.Minute)
+	// this returns "the next minute", which should make sense for most cases.
+	// We can make this configurable in future if needed
+	rounded := t.Round(time.Minute)
+	if rounded.Before(t) {
+		rounded = rounded.Add(time.Minute)
+	}
+	return rounded
 }
