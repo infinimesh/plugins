@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  csvwriter:
+    build:
+      context: .
+      dockerfile: ./CloudConnect/csvwriter/Dockerfile
+    environment:
+      - USERNAME=CHANGEME
+      - PASSWORD=CHANGEME
+      - API_URL=https://api.infinimesh.cloud
+      - TOKEN_REFRESH_INTERVAL_SECS=3600
+      - OBJECT_REFRESH_INTERVAL_SECS=600
+      - REDIS_ADDR=redis:6379
+      - WRITE_DIR=/infinimesh/data/
+    restart: on-failure
+    volumes:
+      - ./data:/infinimesh/data/
+  cloudwriter:
+    build:
+      context: .
+      dockerfile: ./CloudConnect/s3/Dockerfile
+    environment:
+      - READ_DIR=/infinimesh/data/
+      - AWS_ACCESS_KEY_ID=CHANGEME
+      - AWS_SECRET_ACCESS_KEY=CHANGEME
+      - AWS_REGION=us-east-1
+      - AWS_S3BUCKETNAME=infinimesh
+    volumes:
+      - ./data:/infinimesh/data/
