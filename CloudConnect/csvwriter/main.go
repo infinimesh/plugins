@@ -39,41 +39,35 @@ func main() {
 		apiUrl,
 	)
 	writeDir := os.Getenv(envWriteDir)
-	err = os.MkdirAll(writeDir, os.ModePerm)
-	if err != nil {
-		log.Fatalf("failed to mkdir: %v", err)
-	}
 	wrappers.NewObjectManager(
 		apiHandler,
 		(&objectWorkerFactory{
-			api: apiHandler,
-			writer: &writer{
-				writeDir: writeDir,
-			},
+			api:      apiHandler,
+			writeDir: writeDir,
 		}).NewObjectWorker,
 		time.Duration(objectRefreshIntervalSecs)*time.Second,
 	).Start()
 }
 
 type objectWorkerFactory struct {
-	api    api.Handler
-	writer *writer
+	api      api.Handler
+	writeDir string
 }
 
 func (f *objectWorkerFactory) NewObjectWorker(obj api.Object) wrappers.Process {
 	return &objectWorker{
-		obj:    obj,
-		api:    f.api,
-		writer: f.writer,
-		done:   make(chan struct{}),
+		obj:      obj,
+		api:      f.api,
+		writeDir: f.writeDir + obj.UID + "/",
+		done:     make(chan struct{}),
 	}
 }
 
 type objectWorker struct {
-	obj    api.Object
-	api    api.Handler
-	writer *writer
-	done   chan struct{}
+	obj      api.Object
+	api      api.Handler
+	writeDir string
+	done     chan struct{}
 }
 
 func (w *objectWorker) Start() {
@@ -81,6 +75,14 @@ func (w *objectWorker) Start() {
 	if err != nil {
 		log.Printf("error on get devices state stream: %s\n", err)
 		return
+	}
+
+	err := os.MkdirAll(w.writeDir, os.ModePerm)
+	if err != nil {
+		log.Fatalf("failed to mkdir: %v", err) // this should not happen
+	}
+	writer := &writer{
+		writeDir: w.writeDir,
 	}
 
 	for {
@@ -101,7 +103,7 @@ func (w *objectWorker) Start() {
 				state.Result.ReportedState.Version,
 				string(j),
 			}
-			err := w.writer.Write(record)
+			err := writer.Write(record)
 			if err != nil {
 				log.Printf("failed to write record to csv: %v\n", err)
 			} else {

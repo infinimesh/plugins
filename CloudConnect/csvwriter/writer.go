@@ -17,23 +17,17 @@ type writer struct {
 func (w *writer) Write(record []string) error {
 	tn := time.Now()
 
-	// write to existing file
 	if w.currWriter != nil && tn.Before(w.writeUntil) {
 		w.currWriter.Write(record)
+		w.currWriter.Flush() // this ensures that the file modtime is continously updated
 		return nil
 	}
 
-	// clean up previous file
-	if w.currWriter != nil {
-		w.currWriter.Flush()
-	}
 	if w.currFile != nil {
 		if err := w.currFile.Close(); err != nil {
 			return err
 		}
 	}
-
-	// write to new file
 	wu := writeUntil(tn)
 	f, err := os.Create(w.writeDir + strconv.FormatInt(wu.Unix(), 10) + ".csv")
 	if err != nil {
@@ -43,7 +37,8 @@ func (w *writer) Write(record []string) error {
 	w.currFile = f
 	writer := csv.NewWriter(f)
 	w.currWriter = writer
-	writer.Write(record)
+	w.currWriter.Write(record)
+	w.currWriter.Flush()
 	return nil
 }
 
