@@ -16,7 +16,8 @@ services:
     restart: on-failure
     volumes:
       - ./data:/infinimesh/data/
-  cloudwriter:
+  # s3writer writes to aws s3 - delete this service if unneeded
+  s3writer:
     build:
       context: .
       dockerfile: ./CloudConnect/s3/Dockerfile
@@ -28,3 +29,16 @@ services:
       - AWS_S3BUCKETNAME=infinimesh
     volumes:
       - ./data:/infinimesh/data/
+  # cloudstoragewriter writes to gcp cloud storage - delete this service if unneeded
+  cloudstoragewriter:
+    build:
+      context: .
+      dockerfile: ./CloudConnect/cloudstorage/Dockerfile
+    environment:
+      - READ_DIR=/infinimesh/data/
+      - GOOGLE_APPLICATION_CREDENTIALS=/gcp/service-account-key.json
+      - GCP_PROJECT_ID=CHANGEME
+      - GCP_BUCKET_NAME=infinimesh
+    volumes:
+      - ./data:/infinimesh/data/
+      - CHANGEME.json:/gcp/service-account-key.json
