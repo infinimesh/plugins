@@ -1,4 +1,4 @@
-module github.com/InfiniteDevices/plugins/CloudConnect/s3
+module github.com/infinimesh/plugins/CloudConnect/s3
 
 go 1.15
 

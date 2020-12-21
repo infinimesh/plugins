@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/InfiniteDevices/plugins/redisstream/consumer"
+	"github.com/infinimesh/plugins/redisstream/consumer"
 	"github.com/SAP/go-hdb/driver"
 	"github.com/gomodule/redigo/redis"
 )

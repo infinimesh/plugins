@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/InfiniteDevices/plugins/pkg/api"
-	"github.com/InfiniteDevices/plugins/pkg/wrappers"
+	"github.com/infinimesh/plugins/pkg/api"
+	"github.com/infinimesh/plugins/pkg/wrappers"
 	redistimeseries "github.com/RedisTimeSeries/redistimeseries-go"
 	"github.com/gomodule/redigo/redis"
 )

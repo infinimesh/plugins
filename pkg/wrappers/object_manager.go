@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/InfiniteDevices/plugins/pkg/api"
+	"github.com/infinimesh/plugins/pkg/api"
 )
 
 type Process interface {

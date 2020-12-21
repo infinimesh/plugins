@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/InfiniteDevices/plugins/redisstream/consumer"
+	"github.com/infinimesh/plugins/redisstream/consumer"
 	"github.com/gomodule/redigo/redis"
 	sf "github.com/snowflakedb/gosnowflake"
 )

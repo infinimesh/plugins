@@ -1,3 +1,3 @@
-module github.com/InfiniteDevices/plugins/pkg
+module github.com/infinimesh/plugins/pkg
 
 go 1.15

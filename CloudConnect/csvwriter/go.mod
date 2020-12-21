@@ -1,7 +1,7 @@
-module github.com/InfiniteDevices/plugins/CloudConnect/csvwriter
+module github.com/infinimesh/plugins/CloudConnect/csvwriter
 
 go 1.15
 
-replace github.com/InfiniteDevices/plugins/pkg => ../../pkg
+replace github.com/infinimesh/plugins/pkg => ../../pkg
 
-require github.com/InfiniteDevices/plugins/pkg v0.0.0
+require github.com/infinimesh/plugins/pkg v0.0.0

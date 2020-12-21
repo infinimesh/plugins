@@ -23,7 +23,7 @@ More plugins will follow, please refer to the plugin directory for any developer
 ## building plugins
 checkout and build docker based environments starting in the / directory of plugins, like:  
 ```
-git clone https://github.com/InfiniteDevices/plugins.git  
+git clone https://github.com/infinimesh/plugins.git  
 cd plugins  
 docker-compose -f timeseries/docker-compose.yml --project-directory . up --build
 ```

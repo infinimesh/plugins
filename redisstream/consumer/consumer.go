@@ -7,7 +7,7 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/InfiniteDevices/plugins/pkg/api"
+	"github.com/infinimesh/plugins/pkg/api"
 	"github.com/gomodule/redigo/redis"
 )
 
