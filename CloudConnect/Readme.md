@@ -3,11 +3,13 @@ We develop a cloud native connector to integrate Infinimesh IoT directly into Cl
 
 ## Connector Setup
 
-Simply set the required infinimesh and cloud variables in `docker-compose.yml` and run:
+Simply set the required infinimesh and cloud writer variables in `docker-compose.yml` and run:
 
 ```
 docker-compose -f CloudConnect/docker-compose.yml --project-directory . up --build
 ```
+
+Note that we only support writing to one cloud at a time, thus avoid setting credentials for multiple clouds.
 
 ## Developer Notes
 
