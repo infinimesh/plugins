@@ -6,7 +6,7 @@ We publish here plugins to connect infinimesh to external backends. To enable as
    * [redisstream](redistream)  
    shared code for generic cache and stream, based on redis. This package can be included into future plugins.
    
-* ### plugins
+* ### Plugins and connectors
    * [Elastic](Elastic)  
    Connect Infinimesh IoT seamless into [Elastic](https://elastic.co).
    * [Timeseries](timeseries)  
@@ -20,7 +20,7 @@ We publish here plugins to connect infinimesh to external backends. To enable as
   
 More plugins will follow, please refer to the plugin directory for any developer friendly documentation.
   
-## building plugins
+## Building plugins
 checkout and build docker based environments starting in the / directory of plugins, like:  
 ```
 git clone https://github.com/infinimesh/plugins.git  
