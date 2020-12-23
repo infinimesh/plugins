@@ -27,4 +27,29 @@ git clone https://github.com/infinimesh/plugins.git
 cd plugins  
 docker-compose -f timeseries/docker-compose.yml --project-directory . up --build
 ```
-Please read the notes in the different plugin directories how to set ```username``` / ```password``` and API Endpoint (if not using [infinimesh.cloud](https://console.infinimesh.cloud)).
+Please read the notes in the different plugin directories how to set ```username``` / ```password``` and API Endpoint (if not using [infinimesh.cloud](https://console.infinimesh.cloud)).  
+
+## Deploy to any Kubernetes / OpenShift  
+We recommend to use [kompose](https://kompose.io/) to translate the dockerfiles into kubernetes ready deployments. As example:  
+```
+# verify that it works via docker-compose  
+docker-compose -f Elastic/docker-compose.yml --project-directory . up --build  
+  
+# convert to k8s yaml  
+kompose -f Elastic/docker-compose.yml convert  
+  
+# prepare env - this makes sure that when we run `docker build` the image is accessible via minikube  
+eval $(minikube docker-env)  
+  
+# build images and change the image name so that the k8s cluster doesn't try to pull it from some registry  
+docker build -f ./redisstream/Dockerfile -t redisstream:0.0.1 . # change the image in producer-pod.yaml to redisstream:0.0.1  
+docker build -f ./Elastic/Dockerfile -t elastic:0.0.1 . # change the image in consumer-pod.yaml to elastic:0.0.1  
+  
+# apply each yaml file
+kubectl apply -f xxx.yaml  
+  
+# verify that it's working, eg via logs  
+kubectl logs producer  
+
+```
+
