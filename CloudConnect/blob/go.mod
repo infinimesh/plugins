@@ -1,9 +1,9 @@
-module github.com/InfiniteDevices/plugins/CloudConnect/cloudstorage
+module github.com/infinimesh/plugins/CloudConnect/blob
 
 go 1.15
 
 require (
-	cloud.google.com/go/storage v1.12.0
+	github.com/Azure/azure-storage-blob-go v0.12.0
 	github.com/infinimesh/plugins/CloudConnect/csvprocessor v0.0.0
 )
 

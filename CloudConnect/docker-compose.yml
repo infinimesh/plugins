@@ -42,3 +42,15 @@ services:
     volumes:
       - ./data:/infinimesh/data/
       - CHANGEME.json:/gcp/service-account-key.json
+  # blobwriter writes to azure blob - delete this service if unneeded
+  blobwriter:
+    build:
+      context: .
+      dockerfile: ./CloudConnect/blob/Dockerfile
+    environment:
+      - READ_DIR=/infinimesh/data/
+      - AZ_ACCOUNT_NAME=CHANGEME
+      - AZ_ACCOUNT_KEY=CHANGEME
+      - AZ_CONTAINER_NAME=infinimesh
+    volumes:
+      - ./data:/infinimesh/data/
