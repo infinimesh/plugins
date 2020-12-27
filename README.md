@@ -10,7 +10,7 @@ We publish here plugins to connect infinimesh to external backends. To enable as
    * [Elastic](Elastic)  
    Connect Infinimesh IoT seamless into [Elastic](https://elastic.co).
    * [Timeseries](timeseries)  
-   [Redis-timeseries](https://oss.redislabs.com/redistimeseries/) with [Grafana](https://grafana.com/) for timeseries-analysis and rapid prototyping, can be used in production when configured as a Redis cluster and ready to be hosted via [Redis-Cloud](https://redislabs.com/redis-enterprise-cloud/overview/). 
+   [Redis-timeseries](https://oss.redislabs.com/redistimeseries/) with [Grafana](https://grafana.com/) for Time Series Analysis and rapid prototyping, can be used in production when configured as a Redis cluster and ready to be hosted via [Redis-Cloud](https://redislabs.com/redis-enterprise-cloud/overview/). 
    * [SAPHana](SAPHana)  
    all code to connect infinimesh IoT Platform to any [SAP Hana](https://www.sap.com/products/hana.html) instance
    * [Snowflake](Snowflake)  
