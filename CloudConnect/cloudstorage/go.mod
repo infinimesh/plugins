@@ -1,4 +1,4 @@
-module github.com/InfiniteDevices/plugins/CloudConnect/cloudstorage
+module github.com/infinimesh/plugins/CloudConnect/cloudstorage
 
 go 1.15
 
