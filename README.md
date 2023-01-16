@@ -16,7 +16,7 @@ Plugins for connecting Infinimesh to external backends are published here. To al
    * [Snowflake](Snowflake)  
    all code to connect infinimesh IoT Platform to any [Snowflake](https://www.snowflake.com/) instance.  
    * [Cloud Connect](CloudConnect)  
-   All code required to connect the infinimesh IoT Platform to public cloud providers AWS, GCP, and Azure. Customers can use their own cloud infrastructure and extend infinimesh to other services by using their own cloud native data pipelines and integration tools with this plugin.
+   All code required to connect the infinimesh IoT Platform to public cloud providers AWS, GCP, and Azure. Users can use their own cloud infrastructure and extend infinimesh to other services by using their own cloud native data pipelines and integration tools with this plugin.
   
 More plugins will follow, please refer to the plugin directory for any developer friendly documentation.
   
