@@ -1,5 +1,5 @@
 # Infinimesh plugins
-We publish here plugins to connect infinimesh to external backends. To enable as much as possible modularization we have split the plugins into two main streams:  
+Plugins for connecting Infinimesh to external backends are published here. To allow for as much modularization as possible, we divided the plugins into two main streams:
 * ### generic packages
    * [pkg](pkg)  
    pkg contains shared code to connect to our API, retrieve token and iterate over /objects to find devices in the desired namespace  
@@ -16,7 +16,7 @@ We publish here plugins to connect infinimesh to external backends. To enable as
    * [Snowflake](Snowflake)  
    all code to connect infinimesh IoT Platform to any [Snowflake](https://www.snowflake.com/) instance.  
    * [Cloud Connect](CloudConnect)  
-   all code to connect infinimesh IoT Platform to Public Cloud Provider AWS, GCP and Azure. This plugin enables customers to use their own cloud infrastructure and extend infinimesh to other services, like [Scalytics](https://www.scalytics.io), using their own cloud native data pipelines and integration tools. 
+   All code required to connect the infinimesh IoT Platform to public cloud providers AWS, GCP, and Azure. Users can use their own cloud infrastructure and extend infinimesh to other services by using their own cloud native data pipelines and integration tools with this plugin.
   
 More plugins will follow, please refer to the plugin directory for any developer friendly documentation.
   
@@ -27,7 +27,7 @@ git clone https://github.com/infinimesh/plugins.git
 cd plugins  
 docker-compose -f timeseries/docker-compose.yml --project-directory . up --build
 ```
-Please read the notes in the different plugin directories how to set ```username``` / ```password``` and API Endpoint (if not using [infinimesh.cloud](https://console.infinimesh.cloud)).  
+Please read the notes in the different plugin directories how to set ```username``` / ```password``` and API Endpoint for your own instance of Infinimesh.  
 
 ## Deploy to any Kubernetes / OpenShift  
 We recommend to use [kompose](https://kompose.io/) to translate the dockerfiles into kubernetes ready deployments. As example:  
